@@ -1,42 +1,55 @@
-const merge = require('webpack-merge')
-const common = require('./webpack.common.js')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { merge } = require('webpack-merge')
+
+const paths = require('./paths')
+const common = require('./webpack.common')
 
 module.exports = merge(common, {
   mode: 'production',
-  devtool: 'source-map',
-  plugins: [
-    /**
-     * MiniCssExtractPlugin
-     *
-     * Extracts CSS into separate files and minifies.
-     */
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
+  devtool: false,
+  output: {
+    path: paths.build,
+    publicPath: '/',
+    filename: 'js/[name].[contenthash].bundle.js',
+  },
   module: {
     rules: [
       {
-        test: /\.(scss|css)$/,
+        test: /\.(sass|scss|css)$/,
         use: [
+          MiniCssExtractPlugin.loader,
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'css-loader',
             options: {
-              publicPath: '../../',
+              importLoaders: 2,
+              sourceMap: false,
+              modules: false,
             },
           },
-          'css-loader',
           'postcss-loader',
           'sass-loader',
         ],
       },
     ],
   },
+  plugins: [
+    // Extracts CSS into separate files
+    new MiniCssExtractPlugin({
+      filename: 'styles/[name].[contenthash].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin(), '...'],
+    runtimeChunk: {
+      name: 'runtime',
+    },
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
 })

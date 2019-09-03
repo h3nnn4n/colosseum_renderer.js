@@ -1,48 +1,38 @@
-const path = require('path')
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const common = require('./webpack.common.js')
+const { merge } = require('webpack-merge')
+
+const common = require('./webpack.common')
 
 module.exports = merge(common, {
-  /**
-   * Mode
-   *
-   * Set the mode to development or production.
-   *
-   * @url https://webpack.js.org/configuration/mode/
-   */
+  // Set the mode to development or production
   mode: 'development',
 
-  /**
-   * Devtool
-   *
-   * Control how source maps are generated.
-   *
-   * @url https://webpack.js.org/configuration/devtool/
-   */
+  // Control how source maps are generated
   devtool: 'inline-source-map',
 
-  /**
-   * DevServer
-   *
-   * A server for quick development.
-   *
-   * @url https://webpack.js.org/configuration/dev-server/
-   */
+  // Spin up a server for quick development
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    historyApiFallback: true,
     open: true,
     compress: true,
     hot: true,
     port: 8080,
   },
 
-  plugins: [
-    /**
-     * HotModuleReplacementPlugin
-     *
-     * Only update what has changed.
-     */
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  module: {
+    rules: [
+      // Styles: Inject CSS into the head with source maps
+      {
+        test: /\.(sass|scss|css)$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true, importLoaders: 1, modules: false },
+          },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
+        ],
+      },
+    ],
+  },
 })

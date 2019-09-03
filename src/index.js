@@ -1,16 +1,26 @@
-// Test import of a JavaScript function, an SVG, and Sass
-import HelloWorld from './js/HelloWorld'
-import WebpackLogo from './images/webpack-logo.svg'
-import './styles/index.scss'
+// Test import of a JavaScript module
+import { example } from '@/js/example'
 
-// Create SVG logo node
+// Test import of an asset
+import webpackLogo from '@/images/webpack-logo.svg'
+
+// Test import of styles
+import '@/styles/index.scss'
+
+// Appending to the DOM
 const logo = document.createElement('img')
-logo.src = WebpackLogo
+logo.src = webpackLogo
 
-// Create paragraph node
-const greeting = document.createElement('p')
-greeting.textContent = HelloWorld()
+const heading = document.createElement('h1')
+heading.textContent = example()
 
-// Append SVG and paragraph nodes to the DOM
-const app = document.querySelector('#app')
-app.append(logo, greeting)
+// Test a background image url in CSS
+const imageBackground = document.createElement('div')
+imageBackground.classList.add('image')
+
+// Test a public folder asset
+const imagePublic = document.createElement('img')
+imagePublic.src = '/assets/example.png'
+
+const app = document.querySelector('#root')
+app.append(logo, heading, imageBackground, imagePublic)
