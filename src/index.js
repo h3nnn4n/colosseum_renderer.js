@@ -7,6 +7,9 @@ import webpackLogo from '@/images/webpack-logo.svg'
 // Test import of styles
 import '@/styles/index.scss'
 
+// Import p5
+import p5 from "p5";
+
 // Appending to the DOM
 const logo = document.createElement('img')
 logo.src = webpackLogo
@@ -24,3 +27,21 @@ imagePublic.src = '/assets/example.png'
 
 const app = document.querySelector('#root')
 app.append(logo, heading, imageBackground, imagePublic)
+
+const sketch = p5 => {
+  const canvasWidth = p5.windowWidth;
+  const canvasHeight = p5.windowHeight;
+
+  window.p5 = p5;
+
+  p5.setup = () => {
+    p5.createCanvas(canvasWidth, canvasHeight);
+  };
+
+  p5.draw = () => {
+    p5.background("#111");
+    p5.ellipse(50,50,80,80);
+  };
+};
+
+new p5(sketch);
