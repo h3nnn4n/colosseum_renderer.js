@@ -12,4 +12,18 @@ function getMatch(matchId) {
   return JSON.parse(rawPayload);
 }
 
-export { getMatch };
+function getMatchReplayUrl(matchId) {
+  return getMatch(matchId)["replay"];
+}
+
+function getMatchReplay(matchId) {
+  let url = getMatchReplayUrl(matchId);
+  let xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+
+  let rawPayload = xmlHttp.responseText;
+  return rawPayload
+}
+
+export { getMatch, getMatchReplayUrl, getMatchReplay };

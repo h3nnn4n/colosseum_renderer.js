@@ -46,8 +46,14 @@ const sketch = p5 => {
 
 new p5(sketch);
 
-import { getMatch } from '@/js/match_loader'
+import { getMatch, getMatchReplayUrl, getMatchReplay } from '@/js/match_loader'
 
 let matchId = '5de4ea39-c600-4af4-b064-b4e88c4c9cde';
 let match = getMatch(matchId);
 console.log(match);
+
+let matchReplayUrl = getMatchReplayUrl(matchId);
+console.log(matchReplayUrl);
+
+let matchReplay = getMatchReplay(matchId);
+console.log(matchReplay);
