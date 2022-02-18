@@ -1,3 +1,11 @@
+var lzma = require('lzma-native');
+
+//var xz = require("xz");
+//var lzmajs = require('lzma-purejs');
+
+//require("stream-browserify");Url
+//import xz from "xz";
+
 //const API_URL = "https://colosseum.website/"
 const API_URL = "http://localhost:8001/"
 
