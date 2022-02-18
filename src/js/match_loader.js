@@ -1,11 +1,3 @@
-var lzma = require('lzma-native');
-
-//var xz = require("xz");
-//var lzmajs = require('lzma-purejs');
-
-//require("stream-browserify");Url
-//import xz from "xz";
-
 //const API_URL = "https://colosseum.website/"
 const API_URL = "http://localhost:8001/"
 
@@ -20,12 +12,8 @@ function getMatch(matchId) {
   return JSON.parse(rawPayload);
 }
 
-function getMatchReplayUrl(matchId) {
-  return getMatch(matchId)["replay"];
-}
-
 function getMatchReplay(matchId) {
-  let url = getMatchReplayUrl(matchId);
+  let url = API_URL + "api/matches/" + matchId + "/replay/"
   let xmlHttp = new XMLHttpRequest();
   xmlHttp.open( "GET", url, false );
   xmlHttp.send( null );
@@ -34,4 +22,4 @@ function getMatchReplay(matchId) {
   return rawPayload
 }
 
-export { getMatch, getMatchReplayUrl, getMatchReplay };
+export { getMatch, getMatchReplay };
