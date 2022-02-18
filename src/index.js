@@ -46,11 +46,20 @@ const sketch = p5 => {
 
 new p5(sketch);
 
-import { getMatch, getMatchReplayUrl, getMatchReplay } from '@/js/match_loader'
+
+import { renderer } from '@/js/replay_parser';
+import { getMatch, getMatchReplay } from '@/js/match_loader';
 
 let matchId = '5de4ea39-c600-4af4-b064-b4e88c4c9cde';
 let match = getMatch(matchId);
 console.log(match);
 
 let matchReplay = getMatchReplay(matchId);
-console.log(matchReplay);
+console.log(matchReplay[0]);
+
+let r = renderer;
+r.setReplay(matchReplay);
+
+console.log(r.config.grid_width, r.config.grid_height);
+console.log(r.frames[25])
+console.log(r.frames[25].agent_actions)
