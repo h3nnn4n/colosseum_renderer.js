@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -20,10 +19,6 @@ module.exports = {
   plugins: [
     // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
-
-    new webpack.ProvidePlugin({
-        process: 'process/browser',
-    }),
 
     // Copies files from target to destination folder
     new CopyWebpackPlugin({
@@ -64,20 +59,11 @@ module.exports = {
   },
 
   resolve: {
-    fallback: {
-      "fs": false,
-      "assert": require.resolve("assert/"),
-      "os": require.resolve("os-browserify/browser"),
-      "path": require.resolve("path-browserify"),
-      "stream": require.resolve("stream-browserify"),
-      "util": require.resolve("util/"),
-    },
     modules: [paths.src, 'node_modules'],
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@': paths.src,
       assets: paths.public,
-      process: "process/browser",
     },
   },
 }

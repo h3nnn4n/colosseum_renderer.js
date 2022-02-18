@@ -48,16 +48,6 @@
     "url": "git@github.com:taniarascia/webpack-boilerplate"
   },
   "dependencies": {
-    "assert": "^2.0.0",
-    "buffer": "^6.0.3",
-    "lzma-native": "^8.0.6",
-    "lzma-purejs": "^0.9.3",
-    "os-browserify": "^0.3.0",
-    "p5": "^1.4.1",
-    "path-browserify": "^1.0.1",
-    "process": "^0.11.10",
-    "stream-browserify": "^3.0.0",
-    "util": "^0.12.4",
-    "xz": "^2.0.2"
+    "p5": "^1.4.1"
   }
 }
