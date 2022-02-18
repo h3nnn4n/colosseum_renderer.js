@@ -19,7 +19,7 @@ function getMatchReplay(matchId) {
   xmlHttp.send( null );
 
   let rawPayload = xmlHttp.responseText;
-  return rawPayload
+  return JSON.parse(rawPayload);
 }
 
 export { getMatch, getMatchReplay };
