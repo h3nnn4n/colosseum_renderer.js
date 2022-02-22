@@ -2,21 +2,14 @@ import '@/styles/index.scss'
 import p5 from "p5";
 
 import { renderer } from '@/js/replay_parser';
-import { getMatch, getMatchReplay } from '@/js/match_loader';
+import { getMatchReplay } from '@/js/match_loader';
 
 const matchId = '02b57c3e-04d7-4c71-bd44-1963fb6e1377';
-const match = getMatch(matchId);
-console.log(match);
 
 const matchReplay = getMatchReplay(matchId);
-console.log(matchReplay[0]);
 
 const r = renderer;
 r.setReplay(matchReplay);
-
-console.log(r.config.grid_width, r.config.grid_height);
-console.log(r.frames[25])
-console.log(r.frames[25].agent_actions)
 
 let currentFrame = 0;
 let frameCount = r.frames.length;
