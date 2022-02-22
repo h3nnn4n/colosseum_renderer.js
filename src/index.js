@@ -1,36 +1,29 @@
-// Test import of a JavaScript module
-import { example } from '@/js/example'
-
-// Test import of an asset
-import webpackLogo from '@/images/webpack-logo.svg'
-
-// Test import of styles
 import '@/styles/index.scss'
-
-// Import p5
 import p5 from "p5";
 
-// Appending to the DOM
-const logo = document.createElement('img')
-logo.src = webpackLogo
+import { renderer } from '@/js/replay_parser';
+import { getMatch, getMatchReplay } from '@/js/match_loader';
 
-const heading = document.createElement('h1')
-heading.textContent = example()
+const matchId = '02b57c3e-04d7-4c71-bd44-1963fb6e1377';
+const match = getMatch(matchId);
+console.log(match);
 
-// Test a background image url in CSS
-const imageBackground = document.createElement('div')
-imageBackground.classList.add('image')
+const matchReplay = getMatchReplay(matchId);
+console.log(matchReplay[0]);
 
-// Test a public folder asset
-const imagePublic = document.createElement('img')
-imagePublic.src = '/assets/example.png'
+const r = renderer;
+r.setReplay(matchReplay);
 
-const app = document.querySelector('#root')
-app.append(logo, heading, imageBackground, imagePublic)
+console.log(r.config.grid_width, r.config.grid_height);
+console.log(r.frames[25])
+console.log(r.frames[25].agent_actions)
+
+let currentFrame = 0;
+let frameCount = r.frames.length;
 
 const sketch = p5 => {
-  const canvasWidth = p5.windowWidth;
-  const canvasHeight = p5.windowHeight;
+  const canvasWidth = 800;
+  const canvasHeight = 800;
 
   window.p5 = p5;
 
@@ -39,27 +32,14 @@ const sketch = p5 => {
   };
 
   p5.draw = () => {
-    p5.background("#111");
-    p5.ellipse(50,50,80,80);
+    p5.background("#3f3f3f");
+    r.renderFrame(currentFrame, p5);
+
+    currentFrame += 1;
+    if (currentFrame > frameCount) {
+      currentFrame = 0;
+    }
   };
 };
 
 new p5(sketch);
-
-
-import { renderer } from '@/js/replay_parser';
-import { getMatch, getMatchReplay } from '@/js/match_loader';
-
-let matchId = '5de4ea39-c600-4af4-b064-b4e88c4c9cde';
-let match = getMatch(matchId);
-console.log(match);
-
-let matchReplay = getMatchReplay(matchId);
-console.log(matchReplay[0]);
-
-let r = renderer;
-r.setReplay(matchReplay);
-
-console.log(r.config.grid_width, r.config.grid_height);
-console.log(r.frames[25])
-console.log(r.frames[25].agent_actions)
