@@ -36,7 +36,7 @@ const sketch = p5 => {
     r.renderFrame(currentFrame, p5);
 
     currentFrame += 1;
-    if (currentFrame > frameCount) {
+    if (currentFrame >= frameCount) {
       currentFrame = 0;
     }
   };
