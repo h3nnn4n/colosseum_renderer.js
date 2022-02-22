@@ -28,7 +28,7 @@ renderer.renderFrame = function(frameIndex, renderer) {
 
   renderer.fill(255, 0, 0);
   foods.forEach((food) => {
-    renderer.ellipse(food.position[0] * xScale, food.position[1] * yScale, 10, 10);
+    renderer.ellipse(food.position[0] * xScale, food.position[1] * yScale, xScale, yScale);
   });
 }
 
