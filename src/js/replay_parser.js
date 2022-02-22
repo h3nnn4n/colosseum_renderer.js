@@ -30,6 +30,11 @@ renderer.renderFrame = function(frameIndex, renderer) {
   foods.forEach((food) => {
     renderer.ellipse(food.position[0] * xScale, food.position[1] * yScale, xScale, yScale);
   });
+
+  renderer.fill(0, 255, 0);
+  bases.forEach((base) => {
+    renderer.ellipse(base.position[0] * xScale, base.position[1] * yScale, xScale, yScale);
+  });
 }
 
 export { renderer };
