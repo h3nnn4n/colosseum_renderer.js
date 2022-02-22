@@ -1,20 +1,20 @@
 let renderer = {};
 
-renderer.setReplay = function(replay) {
+renderer.setReplay = function (replay) {
   this.state = {};
   this.frames = replay;
   this.config = this.firstFrame().game_config;
-}
+};
 
-renderer.setRenderer = function(renderer) {
+renderer.setRenderer = function (renderer) {
   this.renderer = renderer;
-}
+};
 
-renderer.firstFrame = function() {
+renderer.firstFrame = function () {
   return this.frames[0];
-}
+};
 
-renderer.renderFrame = function(frameIndex, renderer) {
+renderer.renderFrame = function (frameIndex, renderer) {
   const frame = this.frames[frameIndex];
   const actors = frame.world_state.actors;
   const bases = frame.world_state.bases;
@@ -40,6 +40,6 @@ renderer.renderFrame = function(frameIndex, renderer) {
   actors.forEach((actor) => {
     renderer.ellipse(actor.position[0] * xScale, actor.position[1] * yScale, xScale, yScale);
   });
-}
+};
 
 export { renderer };
