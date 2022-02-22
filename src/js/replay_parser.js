@@ -35,6 +35,11 @@ renderer.renderFrame = function(frameIndex, renderer) {
   bases.forEach((base) => {
     renderer.ellipse(base.position[0] * xScale, base.position[1] * yScale, xScale, yScale);
   });
+
+  renderer.fill(0, 0, 255);
+  actors.forEach((actor) => {
+    renderer.ellipse(actor.position[0] * xScale, actor.position[1] * yScale, xScale, yScale);
+  });
 }
 
 export { renderer };
