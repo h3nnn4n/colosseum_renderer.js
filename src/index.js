@@ -4,7 +4,7 @@ import { renderer } from '@/js/replay_parser';
 import { getMatchReplay } from '@/js/match_loader';
 
 // FIXME: This could be much, much cleaner
-const url = document.querySelectorAll('[data-match-replay-id]')[0].dataset["matchReplayId"]
+const url = document.querySelectorAll('[data-match-replay-id]')[0].dataset['matchReplayId'];
 const matchReplay = getMatchReplay(url);
 
 const r = renderer;
