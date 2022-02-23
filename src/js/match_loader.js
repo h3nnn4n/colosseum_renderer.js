@@ -1,8 +1,4 @@
-//const API_URL = "https://colosseum.website/"
-const API_URL = 'http://localhost:8001/';
-
-function getMatch(matchId) {
-  let url = API_URL + 'api/matches/' + matchId + '/';
+function jsonGet(url) {
   let xmlHttp = new XMLHttpRequest();
   xmlHttp.open('GET', url, false);
   xmlHttp.send(null);
@@ -11,14 +7,8 @@ function getMatch(matchId) {
   return JSON.parse(rawPayload);
 }
 
-function getMatchReplay(matchId) {
-  let url = API_URL + 'api/matches/' + matchId + '/replay/';
-  let xmlHttp = new XMLHttpRequest();
-  xmlHttp.open('GET', url, false);
-  xmlHttp.send(null);
-
-  let rawPayload = xmlHttp.responseText;
-  return JSON.parse(rawPayload);
+function getMatchReplay(url) {
+  return jsonGet(url);
 }
 
-export { getMatch, getMatchReplay };
+export { getMatchReplay };

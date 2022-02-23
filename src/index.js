@@ -1,12 +1,11 @@
-import '@/styles/index.scss';
 import p5 from 'p5';
 
 import { renderer } from '@/js/replay_parser';
 import { getMatchReplay } from '@/js/match_loader';
 
-const matchId = '02b57c3e-04d7-4c71-bd44-1963fb6e1377';
-
-const matchReplay = getMatchReplay(matchId);
+// FIXME: This could be much, much cleaner
+const url = document.querySelectorAll('[data-match-replay-id]')[0].dataset["matchReplayId"]
+const matchReplay = getMatchReplay(url);
 
 const r = renderer;
 r.setReplay(matchReplay);
