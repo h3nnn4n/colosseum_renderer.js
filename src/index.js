@@ -20,7 +20,8 @@ const sketch = (p5) => {
   window.p5 = p5;
 
   p5.setup = () => {
-    p5.createCanvas(canvasWidth, canvasHeight);
+    let canvas = p5.createCanvas(canvasWidth, canvasHeight);
+    canvas.parent('#replay-canvas-container');
   };
 
   p5.draw = () => {
