@@ -25,7 +25,7 @@ const sketch = (p5) => {
   };
 
   p5.draw = () => {
-    p5.background('#3f3f3f');
+    p5.background('#d3dae1');
     r.renderFrame(currentFrame, p5);
 
     currentFrame += 1;
