@@ -23,6 +23,9 @@ renderer.renderFrame = function (frameIndex, renderer) {
   const xScale = renderer.width / this.config.grid_width;
   const yScale = renderer.height / this.config.grid_height;
 
+  const xScaleImage = xScale * 1.5;
+  const yScaleImage = yScale * 1.5;
+
   renderer.textSize(32);
   renderer.text(frameIndex, 10, 30);
 
@@ -30,10 +33,10 @@ renderer.renderFrame = function (frameIndex, renderer) {
   foods.forEach((food) => {
     renderer.image(
       renderer.cherry,
-      food.position[0] * xScale - xScale,
-      food.position[1] * yScale - yScale,
-      xScale * 2,
-      yScale * 2
+      food.position[0] * xScale - xScaleImage * 0.5,
+      food.position[1] * yScale - yScaleImage * 0.5,
+      xScaleImage,
+      yScaleImage
     );
   });
 
@@ -42,10 +45,10 @@ renderer.renderFrame = function (frameIndex, renderer) {
     renderer.ellipse(base.position[0] * xScale, base.position[1] * yScale, xScale, yScale);
     renderer.image(
       renderer.hut,
-      base.position[0] * xScale - xScale,
-      base.position[1] * yScale - yScale,
-      xScale * 2,
-      yScale * 2
+      base.position[0] * xScale - xScaleImage * 0.5,
+      base.position[1] * yScale - yScaleImage * 0.5,
+      xScaleImage,
+      yScaleImage
     );
   });
 
@@ -54,10 +57,10 @@ renderer.renderFrame = function (frameIndex, renderer) {
     renderer.ellipse(actor.position[0] * xScale, actor.position[1] * yScale, xScale, yScale);
     renderer.image(
       renderer.monocle,
-      actor.position[0] * xScale - xScale,
-      actor.position[1] * yScale - yScale,
-      xScale * 2,
-      yScale * 2
+      actor.position[0] * xScale - xScaleImage * 0.5,
+      actor.position[1] * yScale - yScaleImage * 0.5,
+      xScaleImage,
+      yScaleImage
     );
   });
 };
