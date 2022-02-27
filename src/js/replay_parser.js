@@ -28,17 +28,37 @@ renderer.renderFrame = function (frameIndex, renderer) {
 
   renderer.fill(255, 0, 0);
   foods.forEach((food) => {
-    renderer.ellipse(food.position[0] * xScale, food.position[1] * yScale, xScale, yScale);
+    renderer.image(
+      renderer.cherry,
+      food.position[0] * xScale - xScale,
+      food.position[1] * yScale - yScale,
+      xScale * 2,
+      yScale * 2
+    );
   });
 
   renderer.fill(0, 255, 0);
   bases.forEach((base) => {
     renderer.ellipse(base.position[0] * xScale, base.position[1] * yScale, xScale, yScale);
+    renderer.image(
+      renderer.hut,
+      base.position[0] * xScale - xScale,
+      base.position[1] * yScale - yScale,
+      xScale * 2,
+      yScale * 2
+    );
   });
 
   renderer.fill(0, 0, 255);
   actors.forEach((actor) => {
     renderer.ellipse(actor.position[0] * xScale, actor.position[1] * yScale, xScale, yScale);
+    renderer.image(
+      renderer.monocle,
+      actor.position[0] * xScale - xScale,
+      actor.position[1] * yScale - yScale,
+      xScale * 2,
+      yScale * 2
+    );
   });
 };
 
