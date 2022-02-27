@@ -26,6 +26,8 @@ renderer.renderFrame = function (frameIndex, renderer) {
   const xScaleImage = xScale * 1.5;
   const yScaleImage = yScale * 1.5;
 
+  const imageBackgroundScale = 1.2;
+
   renderer.textSize(32);
   renderer.text(frameIndex, 10, 30);
 
@@ -42,7 +44,12 @@ renderer.renderFrame = function (frameIndex, renderer) {
 
   renderer.fill(0, 255, 0);
   bases.forEach((base) => {
-    renderer.ellipse(base.position[0] * xScale, base.position[1] * yScale, xScale, yScale);
+    renderer.ellipse(
+      base.position[0] * xScale,
+      base.position[1] * yScale,
+      xScale * imageBackgroundScale,
+      yScale * imageBackgroundScale
+    );
     renderer.image(
       renderer.hut,
       base.position[0] * xScale - xScaleImage * 0.5,
@@ -54,7 +61,12 @@ renderer.renderFrame = function (frameIndex, renderer) {
 
   renderer.fill(0, 0, 255);
   actors.forEach((actor) => {
-    renderer.ellipse(actor.position[0] * xScale, actor.position[1] * yScale, xScale, yScale);
+    renderer.ellipse(
+      actor.position[0] * xScale,
+      actor.position[1] * yScale,
+      xScale * imageBackgroundScale,
+      yScale * imageBackgroundScale
+    );
     renderer.image(
       renderer.monocle,
       actor.position[0] * xScale - xScaleImage * 0.5,
