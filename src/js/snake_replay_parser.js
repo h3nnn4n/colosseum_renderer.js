@@ -21,8 +21,11 @@ renderer.renderFrame = function (frameIndex, renderer) {
   const foods = frame.world_state.foods;
   const agentIds = frame.agent_ids;
 
-  const xScale = renderer.width / this.config.grid_width;
-  const yScale = renderer.height / this.config.grid_height;
+  const gridHeight = this.config.grid_width;
+  const gridWidth =  this.config.grid_height;
+
+  const xScale = renderer.width / gridWidth;
+  const yScale = renderer.height / gridHeight;
 
   const xScaleImage = xScale * 0.5;
   const yScaleImage = yScale * 0.5;
@@ -30,6 +33,22 @@ renderer.renderFrame = function (frameIndex, renderer) {
   renderer.textSize(32);
   renderer.text(frameIndex, 10, 30);
   renderer.fill(255, 0, 0);
+
+  // Draw the grid
+  renderer.stroke("light gray");
+  for (let x = 0; x < gridWidth; x++) {
+    renderer.line(
+      x * xScale, 0,
+      x * xScale, gridHeight * yScale,
+    );
+  }
+
+  for (let y = 0; y < gridHeight; y++) {
+    renderer.line(
+      0                  , y * yScale ,
+      gridWidth * xScale , y * yScale ,
+    );
+  }
 
   // Draw the snakes
   agentIds.forEach((agentId) => {
@@ -51,7 +70,6 @@ renderer.renderFrame = function (frameIndex, renderer) {
   });
 
   // Draw the food
-  renderer.fill(255, 0, 0);
   foods.forEach((food) => {
     renderer.image(
       renderer.cherry,
