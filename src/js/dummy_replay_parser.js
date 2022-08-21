@@ -11,7 +11,7 @@ renderer.setRenderer = function (renderer) {
 };
 
 renderer.firstFrame = function () {
-  return {};
+  return this.frames[0];
 };
 
 renderer.renderFrame = function () {
