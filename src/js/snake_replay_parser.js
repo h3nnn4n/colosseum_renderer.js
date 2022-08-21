@@ -81,13 +81,16 @@ renderer.renderFrame = function (frameIndex, renderer) {
   renderer.strokeWeight(1);
 
   // Draw the food
+  renderer.fill("red");
+  renderer.stroke("red");
+  renderer.strokeCap(renderer.ROUND);
   foods.forEach((food) => {
     renderer.image(
       renderer.cherry,
-      food[0] * xScale - xScaleImage * 0.5,
-      food[1] * yScale - yScaleImage * 0.5,
+      food[0] * xScale,
+      food[1] * yScale,
       xScaleImage,
-      yScaleImage
+      yScaleImage,
     );
   });
 };
