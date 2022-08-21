@@ -1,7 +1,7 @@
 import p5 from 'p5';
 
-import { renderer } from '@/js/replay_parser';
-import { getMatchReplay } from '@/js/match_loader';
+import { renderer_manager } from '@/js/replay_parser';
+import { getMatchReplay, getMatchGame } from '@/js/match_loader';
 import monocle from '@/images/monocle.png';
 import cherry from '@/images/cherry.png';
 import hut from '@/images/hut.png';
@@ -11,8 +11,9 @@ import hut from '@/images/hut.png';
 const url = document.querySelectorAll('[data-match-replay-id]')[0].dataset['matchReplayId'];
 console.log(`replay match url is: ${url}`);
 const matchReplay = getMatchReplay(url);
+const game = getMatchGame(url);
 
-const r = renderer;
+const r = renderer_manager.getRenderer(game);
 r.setReplay(matchReplay);
 
 let currentFrame = 0;

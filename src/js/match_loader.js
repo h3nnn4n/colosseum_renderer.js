@@ -12,4 +12,17 @@ function getMatchReplay(url) {
   return jsonGet(url);
 }
 
-export { getMatchReplay };
+function getMatchGame(url_) {
+  let url = url_.replace("/replay/", "/");
+
+  console.log(`getting match url from ${url}`);
+
+  let data = jsonGet(url);
+  const gameName = data.game.name;
+
+  console.log(`game name and id is ${data.game.name} ${data.game.id}`);
+
+  return gameName;
+}
+
+export { getMatchReplay, getMatchGame };
