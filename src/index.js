@@ -6,8 +6,10 @@ import monocle from '@/images/monocle.png';
 import cherry from '@/images/cherry.png';
 import hut from '@/images/hut.png';
 
+
 // FIXME: This could be much, much cleaner
 const url = document.querySelectorAll('[data-match-replay-id]')[0].dataset['matchReplayId'];
+console.log(`replay match url is: ${url}`);
 const matchReplay = getMatchReplay(url);
 
 const r = renderer;

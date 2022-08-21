@@ -8,6 +8,7 @@ function jsonGet(url) {
 }
 
 function getMatchReplay(url) {
+  console.log(`getting match url from ${url}`);
   return jsonGet(url);
 }
 
