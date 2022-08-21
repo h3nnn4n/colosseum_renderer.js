@@ -27,8 +27,11 @@ renderer.renderFrame = function (frameIndex, renderer) {
   const xScale = renderer.width / gridWidth;
   const yScale = renderer.height / gridHeight;
 
-  const xScaleImage = xScale * 0.5;
-  const yScaleImage = yScale * 0.5;
+  const xHalfCellOffset = xScale / 2.0;
+  const yHalfCellOffset = yScale / 2.0;
+
+  const xScaleImage = xScale * 1.0;
+  const yScaleImage = yScale * 1.0;
 
   renderer.textSize(32);
   renderer.text(frameIndex, 10, 30);
@@ -54,20 +57,28 @@ renderer.renderFrame = function (frameIndex, renderer) {
   agentIds.forEach((agentId) => {
     const snake = snakes[agentId];
 
-    renderer.circle(
-      snake.head_position[0] * xScale - xScale * 0.5,
-      snake.head_position[1] * yScale - yScale * 0.5,
-      100,
-    );
+    renderer.stroke("pink");
+    renderer.strokeWeight(xScale * 0.75);
+    renderer.strokeCap(renderer.PROJECT);
+    for (let i = 0; i < snake.positions.length - 1; ++i) {
+      const current = snake.positions[i];
+      const next = snake.positions[i+1];
 
-    snake.positions.forEach((position) => {
-      renderer.circle(
-        position[0] * xScale - xScale * 0.5,
-        position[1] * yScale - yScale * 0.5,
-        50,
+      renderer.line(
+        current[0] * xScale + xHalfCellOffset, current[1] * yScale + yHalfCellOffset,
+        next[0]    * xScale + xHalfCellOffset, next[1]    * yScale + yHalfCellOffset,
       );
-    });
+    }
+
+    renderer.stroke("red");
+    renderer.strokeCap(renderer.ROUND);
+    renderer.circle(
+      snake.head_position[0] * xScale + xHalfCellOffset,
+      snake.head_position[1] * yScale + yHalfCellOffset,
+      xScale / 4.0,
+    );
   });
+  renderer.strokeWeight(1);
 
   // Draw the food
   foods.forEach((food) => {
