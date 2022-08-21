@@ -4,6 +4,14 @@ renderer.setReplay = function (replay) {
   this.state = {};
   this.frames = replay;
   this.config = this.firstFrame().game_config;
+
+  this.colors = [
+    "#a3ac5e", // https://www.color-hex.com/color/a3ac5e
+    "#ac675e", // https://www.color-hex.com/color/ac675e
+    "#5e7cac", // https://www.color-hex.com/color/5e7cac
+    "#5eac8e", // https://www.color-hex.com/color/5eac8e
+    "#8e5eac", // https://www.color-hex.com/color/8e5eac
+  ];
 };
 
 renderer.setRenderer = function (renderer) {
@@ -54,11 +62,13 @@ renderer.renderFrame = function (frameIndex, renderer) {
   }
 
   // Draw the snakes
-  agentIds.forEach((agentId) => {
+  for (let i = 0; i < agentIds.length; ++i) {
+    const agentId = agentIds[i];
+    const snakeColor = this.colors[i];
     const snake = snakes[agentId];
 
-    renderer.fill("light green");
-    renderer.stroke("light green");
+    renderer.fill(snakeColor);
+    renderer.stroke(snakeColor);
     renderer.strokeWeight(xScale * 0.75);
     renderer.strokeCap(renderer.PROJECT);
     for (let i = 0; i < snake.positions.length - 1; ++i) {
@@ -71,8 +81,8 @@ renderer.renderFrame = function (frameIndex, renderer) {
       );
     }
 
-    renderer.fill("green");
-    renderer.stroke("green");
+    renderer.fill(snakeColor);
+    renderer.stroke(snakeColor);
     renderer.strokeCap(renderer.ROUND);
     renderer.strokeWeight(1);
     renderer.circle(
@@ -80,12 +90,12 @@ renderer.renderFrame = function (frameIndex, renderer) {
       snake.head_position[1] * yScale + yHalfCellOffset,
       xScale,
     );
-  });
-  renderer.strokeWeight(1);
+  };
 
   // Draw the food
   renderer.fill("red");
   renderer.stroke("red");
+  renderer.strokeWeight(1);
   renderer.strokeCap(renderer.ROUND);
   foods.forEach((food) => {
     renderer.image(
