@@ -16,8 +16,11 @@ const game = getMatchGame(url);
 const r = renderer_manager.getRenderer(game);
 r.setReplay(matchReplay);
 
+const skipFrame = 5;
+const frameCount = r.frames.length;
+
+let skipFrameCounter = 0;
 let currentFrame = 0;
-let frameCount = r.frames.length;
 
 const sketch = (p5) => {
   const canvasWidth = 800;
@@ -40,7 +43,13 @@ const sketch = (p5) => {
     p5.background('#d3dae1');
     r.renderFrame(currentFrame, p5);
 
-    currentFrame += 1;
+    skipFrameCounter += 1;
+
+    if (skipFrameCounter >= skipFrame) {
+      currentFrame += 1;
+      skipFrameCounter = 0;
+    }
+
     if (currentFrame >= frameCount) {
       currentFrame = 0;
     }
