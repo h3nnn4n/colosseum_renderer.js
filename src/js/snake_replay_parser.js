@@ -57,7 +57,8 @@ renderer.renderFrame = function (frameIndex, renderer) {
   agentIds.forEach((agentId) => {
     const snake = snakes[agentId];
 
-    renderer.stroke("pink");
+    renderer.fill("light green");
+    renderer.stroke("light green");
     renderer.strokeWeight(xScale * 0.75);
     renderer.strokeCap(renderer.PROJECT);
     for (let i = 0; i < snake.positions.length - 1; ++i) {
@@ -70,12 +71,14 @@ renderer.renderFrame = function (frameIndex, renderer) {
       );
     }
 
-    renderer.stroke("red");
+    renderer.fill("green");
+    renderer.stroke("green");
     renderer.strokeCap(renderer.ROUND);
+    renderer.strokeWeight(1);
     renderer.circle(
       snake.head_position[0] * xScale + xHalfCellOffset,
       snake.head_position[1] * yScale + yHalfCellOffset,
-      xScale / 4.0,
+      xScale,
     );
   });
   renderer.strokeWeight(1);
