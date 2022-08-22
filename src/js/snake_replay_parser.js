@@ -67,6 +67,8 @@ renderer.renderFrame = function (frameIndex, renderer) {
     const snakeColor = this.colors[i];
     const snake = snakes[agentId];
 
+    if (!snake.alive) continue;
+
     renderer.fill(snakeColor);
     renderer.stroke(snakeColor);
     renderer.strokeWeight(xScale * 0.75);
