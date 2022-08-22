@@ -6,7 +6,6 @@ import monocle from '@/images/monocle.png';
 import cherry from '@/images/cherry.png';
 import hut from '@/images/hut.png';
 
-
 // FIXME: This could be much, much cleaner
 const url = document.querySelectorAll('[data-match-replay-id]')[0].dataset['matchReplayId'];
 console.log(`replay match url is: ${url}`);
@@ -16,8 +15,11 @@ const game = getMatchGame(url);
 const r = renderer_manager.getRenderer(game);
 r.setReplay(matchReplay);
 
+const skipFrame = 5;
+const frameCount = r.frames.length;
+
+let skipFrameCounter = 0;
 let currentFrame = 0;
-let frameCount = r.frames.length;
 
 const sketch = (p5) => {
   const canvasWidth = 800;
@@ -40,7 +42,13 @@ const sketch = (p5) => {
     p5.background('#d3dae1');
     r.renderFrame(currentFrame, p5);
 
-    currentFrame += 1;
+    skipFrameCounter += 1;
+
+    if (skipFrameCounter >= skipFrame) {
+      currentFrame += 1;
+      skipFrameCounter = 0;
+    }
+
     if (currentFrame >= frameCount) {
       currentFrame = 0;
     }
