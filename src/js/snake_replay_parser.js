@@ -81,8 +81,6 @@ renderer.renderFrame = function (frameIndex, renderer) {
       );
     }
 
-    renderer.fill(snakeColor);
-    renderer.stroke(snakeColor);
     renderer.strokeCap(renderer.ROUND);
     renderer.strokeWeight(1);
     renderer.circle(
