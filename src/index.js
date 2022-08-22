@@ -12,6 +12,8 @@ console.log(`replay match url is: ${url}`);
 const matchReplay = getMatchReplay(url);
 const game = getMatchGame(url);
 
+console.log(`game is: ${game}`);
+
 const r = renderer_manager.getRenderer(game);
 r.setReplay(matchReplay);
 
