@@ -6,11 +6,11 @@ renderer.setReplay = function (replay) {
   this.config = this.firstFrame().game_config;
 
   this.colors = [
-    "#a3ac5e", // https://www.color-hex.com/color/a3ac5e
-    "#ac675e", // https://www.color-hex.com/color/ac675e
-    "#5e7cac", // https://www.color-hex.com/color/5e7cac
-    "#5eac8e", // https://www.color-hex.com/color/5eac8e
-    "#8e5eac", // https://www.color-hex.com/color/8e5eac
+    '#a3ac5e', // https://www.color-hex.com/color/a3ac5e
+    '#ac675e', // https://www.color-hex.com/color/ac675e
+    '#5e7cac', // https://www.color-hex.com/color/5e7cac
+    '#5eac8e', // https://www.color-hex.com/color/5eac8e
+    '#8e5eac', // https://www.color-hex.com/color/8e5eac
   ];
 };
 
@@ -30,7 +30,7 @@ renderer.renderFrame = function (frameIndex, renderer) {
   const agentIds = frame.agent_ids;
 
   const gridHeight = this.config.grid_width;
-  const gridWidth =  this.config.grid_height;
+  const gridWidth = this.config.grid_height;
 
   const xScale = renderer.width / gridWidth;
   const yScale = renderer.height / gridHeight;
@@ -46,19 +46,13 @@ renderer.renderFrame = function (frameIndex, renderer) {
   renderer.fill(255, 0, 0);
 
   // Draw the grid
-  renderer.stroke("light gray");
+  renderer.stroke('light gray');
   for (let x = 0; x < gridWidth; x++) {
-    renderer.line(
-      x * xScale, 0,
-      x * xScale, gridHeight * yScale,
-    );
+    renderer.line(x * xScale, 0, x * xScale, gridHeight * yScale);
   }
 
   for (let y = 0; y < gridHeight; y++) {
-    renderer.line(
-      0                  , y * yScale ,
-      gridWidth * xScale , y * yScale ,
-    );
+    renderer.line(0, y * yScale, gridWidth * xScale, y * yScale);
   }
 
   // Draw the snakes
@@ -75,11 +69,13 @@ renderer.renderFrame = function (frameIndex, renderer) {
     renderer.strokeCap(renderer.PROJECT);
     for (let i = 0; i < snake.positions.length - 1; ++i) {
       const current = snake.positions[i];
-      const next = snake.positions[i+1];
+      const next = snake.positions[i + 1];
 
       renderer.line(
-        current[0] * xScale + xHalfCellOffset, current[1] * yScale + yHalfCellOffset,
-        next[0]    * xScale + xHalfCellOffset, next[1]    * yScale + yHalfCellOffset,
+        current[0] * xScale + xHalfCellOffset,
+        current[1] * yScale + yHalfCellOffset,
+        next[0] * xScale + xHalfCellOffset,
+        next[1] * yScale + yHalfCellOffset
       );
     }
 
@@ -88,23 +84,17 @@ renderer.renderFrame = function (frameIndex, renderer) {
     renderer.circle(
       snake.head_position[0] * xScale + xHalfCellOffset,
       snake.head_position[1] * yScale + yHalfCellOffset,
-      xScale,
+      xScale
     );
-  };
+  }
 
   // Draw the food
-  renderer.fill("red");
-  renderer.stroke("red");
+  renderer.fill('red');
+  renderer.stroke('red');
   renderer.strokeWeight(1);
   renderer.strokeCap(renderer.ROUND);
   foods.forEach((food) => {
-    renderer.image(
-      renderer.cherry,
-      food[0] * xScale,
-      food[1] * yScale,
-      xScaleImage,
-      yScaleImage,
-    );
+    renderer.image(renderer.cherry, food[0] * xScale, food[1] * yScale, xScaleImage, yScaleImage);
   });
 };
 

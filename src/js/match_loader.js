@@ -13,7 +13,7 @@ function getMatchReplay(url) {
 }
 
 function getMatchGame(url_) {
-  let url = url_.replace("/replay/", "/");
+  let url = url_.replace('/replay/', '/');
 
   console.log(`getting match url from ${url}`);
 

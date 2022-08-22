@@ -1,7 +1,7 @@
 let renderer = {};
 
 renderer.setReplay = function (replay) {
-  console.log("setting replay");
+  console.log('setting replay');
   this.state = {};
   this.frames = replay;
   this.config = this.firstFrame().game_config;

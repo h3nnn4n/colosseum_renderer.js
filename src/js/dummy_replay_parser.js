@@ -14,7 +14,6 @@ renderer.firstFrame = function () {
   return this.frames[0];
 };
 
-renderer.renderFrame = function () {
-};
+renderer.renderFrame = function () {};
 
 export { renderer };
