@@ -41,10 +41,6 @@ renderer.renderFrame = function (frameIndex, renderer) {
   const xScaleImage = xScale * 1.0;
   const yScaleImage = yScale * 1.0;
 
-  renderer.textSize(32);
-  renderer.text(frameIndex, 10, 30);
-  renderer.fill(255, 0, 0);
-
   // Draw the grid
   renderer.stroke('light gray');
   for (let x = 0; x < gridWidth; x++) {
@@ -107,6 +103,13 @@ renderer.renderFrame = function (frameIndex, renderer) {
   foods.forEach((food) => {
     renderer.image(renderer.cherry, food[0] * xScale, food[1] * yScale, xScaleImage, yScaleImage);
   });
+
+  // Draw the epoch at the top left
+  renderer.stroke('#282818');
+  renderer.fill('#282818');
+  renderer.textSize(32);
+  renderer.text(frameIndex, 10, 30);
+  renderer.fill(255, 0, 0);
 };
 
 export { renderer };
