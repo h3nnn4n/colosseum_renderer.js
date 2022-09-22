@@ -30,7 +30,7 @@ function getMatchGame(url_) {
 function setPlayerInfo(data, baseUrl) {
   const re = new RegExp('/api/match.*', 'i');
   const participants = data.participants;
-  window.players = [];
+  window.agents = {};
 
   participants.forEach(function (agentId) {
     let url = baseUrl.replace(re, `/api/agents/${agentId}`);
@@ -42,7 +42,8 @@ function setPlayerInfo(data, baseUrl) {
     }).done(function (data) {
       console.log(data);
 
-      window.players.push(data);
+      const agentId = data.id;
+      window.agents[agentId] = data;
     });
   });
 }

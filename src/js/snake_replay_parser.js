@@ -54,6 +54,7 @@ renderer.renderFrame = function (frameIndex, renderer) {
   // Draw the snakes
   for (let i = 0; i < agentIds.length; ++i) {
     const agentId = agentIds[i];
+    const agentData = window.agents[agentId];
     const snakeColor = this.colors[i];
     const headColor = renderer.lerpColor(
       renderer.color(this.colors[i]),
@@ -62,37 +63,48 @@ renderer.renderFrame = function (frameIndex, renderer) {
     );
     const snake = snakes[agentId];
 
-    if (!snake.alive) continue;
+    if (snake.alive) {
+      renderer.fill(snakeColor);
+      renderer.stroke(snakeColor);
+      renderer.strokeWeight(xScale * 0.75);
+      renderer.strokeCap(renderer.PROJECT);
+      for (let i = 0; i < snake.positions.length - 1; ++i) {
+        const current = snake.positions[i];
+        const next = snake.positions[i + 1];
 
-    renderer.fill(snakeColor);
-    renderer.stroke(snakeColor);
-    renderer.strokeWeight(xScale * 0.75);
-    renderer.strokeCap(renderer.PROJECT);
-    for (let i = 0; i < snake.positions.length - 1; ++i) {
-      const current = snake.positions[i];
-      const next = snake.positions[i + 1];
+        renderer.line(
+          current[0] * xScale + xHalfCellOffset,
+          current[1] * yScale + yHalfCellOffset,
+          next[0] * xScale + xHalfCellOffset,
+          next[1] * yScale + yHalfCellOffset
+        );
+      }
 
-      renderer.line(
-        current[0] * xScale + xHalfCellOffset,
-        current[1] * yScale + yHalfCellOffset,
-        next[0] * xScale + xHalfCellOffset,
-        next[1] * yScale + yHalfCellOffset
+      renderer.strokeCap(renderer.ROUND);
+      renderer.strokeWeight(1);
+
+      renderer.fill(headColor);
+      renderer.stroke(headColor);
+      renderer.rectMode(renderer.CENTER);
+      renderer.rect(
+        snake.head_position[0] * xScale + xHalfCellOffset,
+        snake.head_position[1] * yScale + yHalfCellOffset,
+        xScale * 0.75,
+        yScale * 0.75
       );
+      renderer.rectMode(renderer.CORNER);
     }
 
-    renderer.strokeCap(renderer.ROUND);
-    renderer.strokeWeight(1);
-
-    renderer.fill(headColor);
-    renderer.stroke(headColor);
-    renderer.rectMode(renderer.CENTER);
-    renderer.rect(
-      snake.head_position[0] * xScale + xHalfCellOffset,
-      snake.head_position[1] * yScale + yHalfCellOffset,
-      xScale * 0.75,
-      yScale * 0.75
-    );
-    renderer.rectMode(renderer.CORNER);
+    // Draw agent name and score
+    if (agentData) {
+      let agentScore = frame.world_state.score[agentId];
+      renderer.stroke('#282818');
+      renderer.strokeWeight(2);
+      renderer.fill(snakeColor);
+      renderer.textSize(24);
+      renderer.text(`${agentData.name}: ${agentScore}`, 10, 40 + 28 * (i + 1));
+      renderer.fill(255, 0, 0);
+    }
   }
 
   // Draw the food
