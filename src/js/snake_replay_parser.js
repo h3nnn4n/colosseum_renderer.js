@@ -54,7 +54,6 @@ renderer.renderFrame = function (frameIndex, renderer) {
   // Draw the snakes
   for (let i = 0; i < agentIds.length; ++i) {
     const agentId = agentIds[i];
-    const agentData = window.agents[agentId];
     const snakeColor = this.colors[i];
     const headColor = renderer.lerpColor(
       renderer.color(this.colors[i]),
@@ -94,15 +93,21 @@ renderer.renderFrame = function (frameIndex, renderer) {
       );
       renderer.rectMode(renderer.CORNER);
     }
+  }
 
-    // Draw agent name and score
+  // Draw agent name and score
+  for (let i = 0; i < agentIds.length; ++i) {
+    const agentId = agentIds[i];
+    const agentData = window.agents[agentId];
+    const snakeColor = this.colors[i];
+
     if (agentData) {
       let agentScore = frame.world_state.score[agentId];
       renderer.stroke('#282818');
       renderer.strokeWeight(2);
       renderer.fill(snakeColor);
       renderer.textSize(24);
-      renderer.text(`${agentData.name}: ${agentScore}`, 10, 40 + 28 * (i + 1));
+      renderer.text(`${agentData.name}: ${agentScore}`, 10, 30 + 28 * (i + 1));
       renderer.fill(255, 0, 0);
     }
   }
