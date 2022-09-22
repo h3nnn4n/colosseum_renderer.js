@@ -59,6 +59,11 @@ renderer.renderFrame = function (frameIndex, renderer) {
   for (let i = 0; i < agentIds.length; ++i) {
     const agentId = agentIds[i];
     const snakeColor = this.colors[i];
+    const headColor = renderer.lerpColor(
+      renderer.color(this.colors[i]),
+      renderer.color(0, 0, 0),
+      0.2
+    );
     const snake = snakes[agentId];
 
     if (!snake.alive) continue;
@@ -81,11 +86,17 @@ renderer.renderFrame = function (frameIndex, renderer) {
 
     renderer.strokeCap(renderer.ROUND);
     renderer.strokeWeight(1);
-    renderer.circle(
+
+    renderer.fill(headColor);
+    renderer.stroke(headColor);
+    renderer.rectMode(renderer.CENTER);
+    renderer.rect(
       snake.head_position[0] * xScale + xHalfCellOffset,
       snake.head_position[1] * yScale + yHalfCellOffset,
-      xScale
+      xScale * 0.75,
+      yScale * 0.75
     );
+    renderer.rectMode(renderer.CORNER);
   }
 
   // Draw the food
